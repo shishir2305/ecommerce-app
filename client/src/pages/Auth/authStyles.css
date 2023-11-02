@@ -1,0 +1,27 @@
+/* register page */
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  background: linear-gradient(to bottom, rgb(185, 226, 243), white);
+}
+.registerForm {
+  display: flex;
+  gap: 2rem;
+  margin: 10px 0;
+  padding: 1.5rem;
+  border-radius: 5px;
+  border: 2px solid gray;
+  box-shadow: 0 8px 6px -6px gray;
+}
+
+/* login form */
+.loginForm {
+  margin: 10px 0;
+  padding: 1.5rem;
+  border-radius: 5px;
+  border: 2px solid gray;
+  box-shadow: 0 8px 6px -6px gray;
+}
