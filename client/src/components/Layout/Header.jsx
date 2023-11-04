@@ -61,16 +61,34 @@ function Header() {
                   </li>
                 </>
               ) : (
-                <li className="nav-item">
-                  <NavLink
-                    onClick={handleLogout}
-                    to="/login"
-                    className="nav-link"
-                    href="#"
-                  >
-                    Logout
-                  </NavLink>
-                </li>
+                <>
+                  <li className="nav-item dropdown">
+                    <NavLink
+                      className="nav-link dropdown-toggle"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      {auth?.user?.name}
+                    </NavLink>
+                    <ul className="dropdown-menu">
+                      <li className="nav-item">
+                        <NavLink to="/dashboard" className="nav-link">
+                          DASHBOARD
+                        </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink
+                          onClick={handleLogout}
+                          to="/login"
+                          className="nav-link"
+                        >
+                          LOGOUT
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </li>
+                </>
               )}
 
               <li className="nav-item">
