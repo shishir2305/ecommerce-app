@@ -13,6 +13,7 @@ function Register() {
     password: "",
     address: "",
     phone: "",
+    securityAnswer: "",
   });
 
   const onFormChange = (e) => {
@@ -106,10 +107,27 @@ function Register() {
                 value={formData.phone}
               />
             </div>
+
+            <div className="mb-3">
+              <label className="form-label" htmlFor="securityAnswer">
+                What is your pet's name ?
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="securityAnswer"
+                onChange={onFormChange}
+                value={formData.securityAnswer}
+              />
+            </div>
           </div>
         </form>
-        <button onClick={onFormSubmit} className="btn btn-primary">
-          Submit
+        <button
+          onClick={onFormSubmit}
+          className="btn btn-primary"
+          style={{ width: "10rem", padding: "6px" }}
+        >
+          REGISTER
         </button>
       </div>
     </Layout>

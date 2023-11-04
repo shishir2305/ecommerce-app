@@ -1,19 +1,17 @@
 import { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./authStyles.css";
-import { useAuth } from "../../context/auth";
 
-function Login() {
+function ForgotPassword() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
+    securityAnswer: "",
+    newPassword: "",
   });
-  const [auth, setAuth] = useAuth();
 
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -22,18 +20,12 @@ function Login() {
   const onFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/login", formData);
+      const res = await axios.post("/api/v1/auth/forgot-password", formData);
       if (res && res.data.success) {
-        setAuth({
-          ...auth,
-          user: res.data.user,
-          token: res.data.token,
-        });
-        localStorage.setItem("auth", JSON.stringify(res.data));
         setTimeout(() => {
           toast.success(res.data && res.data.message);
         }, 1000);
-        navigate(location.state || "/");
+        navigate("/login");
       } else {
         toast.error(res.data.message);
       }
@@ -45,8 +37,8 @@ function Login() {
   return (
     <Layout>
       <div className="register">
-        <h1>Login Page</h1>
-        <form className="loginForm">
+        <h1>Forgot Password</h1>
+        <form className="loginForm mb-4">
           <div className="mb-3">
             <label className="form-label" htmlFor="email">
               Email
@@ -61,31 +53,35 @@ function Login() {
           </div>
           <div className="mb-3">
             <label className="form-label" htmlFor="password">
-              Password
+              What is your pet's name ?
             </label>
             <input
               type="password"
               className="form-control"
-              id="password"
+              id="securityAnswer"
+              onChange={onFormChange}
+              value={formData.securityAnswer}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="password">
+              New Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="newPassword"
               onChange={onFormChange}
               value={formData.password}
             />
           </div>
         </form>
-        <div className="d-flex gap-2">
-          <button onClick={onFormSubmit} className="btn btn-primary">
-            LOGIN
-          </button>
-          <button
-            onClick={() => navigate("/forgot-password")}
-            className="btn btn-danger"
-          >
-            FORGOT PASSWORD
-          </button>
-        </div>
+        <button onClick={onFormSubmit} className="btn btn-primary">
+          RESET PASSWORD
+        </button>
       </div>
     </Layout>
   );
 }
 
-export default Login;
+export default ForgotPassword;
