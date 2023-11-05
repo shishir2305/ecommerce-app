@@ -73,7 +73,12 @@ function Header() {
                     </NavLink>
                     <ul className="dropdown-menu">
                       <li className="nav-item">
-                        <NavLink to="/dashboard" className="nav-link">
+                        <NavLink
+                          to={`dashboard/${
+                            auth?.user?.role === 1 ? "admin" : "user"
+                          }`}
+                          className="nav-link"
+                        >
                           DASHBOARD
                         </NavLink>
                       </li>
