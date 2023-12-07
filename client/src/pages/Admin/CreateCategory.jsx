@@ -14,7 +14,7 @@ const CreateCategory = () => {
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState("");
   const [auth, setAuth] = useAuth();
-  //handle Form
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -42,7 +42,6 @@ const CreateCategory = () => {
     }
   };
 
-  //get all cat
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/get-category");
@@ -59,13 +58,17 @@ const CreateCategory = () => {
     getAllCategory();
   }, []);
 
-  //update category
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
         `/api/v1/category/update-category/${selected._id}`,
-        { name: updatedName }
+        { name: updatedName },
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
+        }
       );
       if (data.success) {
         toast.success(`${updatedName} is updated`);
@@ -80,11 +83,16 @@ const CreateCategory = () => {
       toast.error("Somtihing went wrong");
     }
   };
-  //delete category
+
   const handleDelete = async (pId) => {
     try {
       const { data } = await axios.delete(
-        `/api/v1/category/delete-category/${pId}`
+        `/api/v1/category/delete-category/${pId}`,
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
+        }
       );
       if (data.success) {
         toast.success(`category is deleted`);
@@ -155,7 +163,7 @@ const CreateCategory = () => {
             <Modal
               onCancel={() => setVisible(false)}
               footer={null}
-              visible={visible}
+              open={visible}
             >
               <CategoryForm
                 value={updatedName}
