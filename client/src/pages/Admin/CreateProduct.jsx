@@ -83,6 +83,15 @@ function CreateProduct() {
                   </div>
                 )}
               </div>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  value={name}
+                  placeholder="Write a name"
+                  className="form-control"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
             </div>
           </div>
         </div>
