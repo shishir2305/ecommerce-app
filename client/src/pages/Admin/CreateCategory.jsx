@@ -7,7 +7,7 @@ import CategoryForm from "../../components/Form/CategoryForm";
 import { Modal } from "antd";
 import { useAuth } from "../../context/auth";
 
-const CreateCategory = () => {
+function CreateCategory() {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [visible, setVisible] = useState(false);
@@ -176,6 +176,6 @@ const CreateCategory = () => {
       </div>
     </Layout>
   );
-};
+}
 
 export default CreateCategory;
