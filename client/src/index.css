@@ -74,3 +74,9 @@
   align-items: center;
   justify-content: center;
 }
+
+/* products page */
+.product-link {
+  text-decoration: none;
+  color: black !important;
+}
