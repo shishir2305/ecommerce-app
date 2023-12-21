@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./../components/Layout/Layout";
 
-const Policy = () => {
+function Policy() {
   return (
     <Layout>
       <div className="row contactus ">
@@ -24,6 +24,6 @@ const Policy = () => {
       </div>
     </Layout>
   );
-};
+}
 
 export default Policy;

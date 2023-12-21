@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./../components/Layout/Layout";
 
-const About = () => {
+function About() {
   return (
     <Layout>
       <div className="row contactus ">
@@ -25,6 +25,6 @@ const About = () => {
       </div>
     </Layout>
   );
-};
+}
 
 export default About;
