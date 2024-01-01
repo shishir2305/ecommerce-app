@@ -5,10 +5,13 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../../context/auth";
+
 const { Option } = Select;
 
 const UpdateProduct = () => {
   const navigate = useNavigate();
+  const [auth, setAuth] = useAuth();
   const params = useParams();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
@@ -71,7 +74,12 @@ const UpdateProduct = () => {
       productData.append("category", category);
       const { data } = axios.put(
         `/api/v1/product/update-product/${id}`,
-        productData
+        productData,
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
+        }
       );
       if (data?.success) {
         toast.error(data?.message);
@@ -90,7 +98,12 @@ const UpdateProduct = () => {
       let answer = window.prompt("Are You Sure want to delete this product ? ");
       if (!answer) return;
       const { data } = await axios.delete(
-        `/api/v1/product/delete-product/${id}`
+        `/api/v1/product/delete-product/${id}`,
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
+        }
       );
       toast.success("Product DEleted Succfully");
       navigate("/dashboard/admin/products");
